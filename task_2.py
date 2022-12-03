@@ -9,19 +9,26 @@ from random import randint as rdt
 
 fig = plt.figure()
 fig2 = plt.figure()
+fig3 = plt.figure()
+
 ax = fig.add_subplot()
 ax3 = fig.add_subplot()
 ax2 = fig2.add_subplot()
+ax4 = fig3.add_subplot()
 
 
 S = [(rdt(100,301), rdt(3_000_000, 20_000_001)) for _ in range(15)]
 
 x = [i for i in range(len(S))]
 y = [S[i][1]/S[i][0] for i in range(len(S))]
+t = [S[i][1]/S[i][0] for i in range(len(S))]
 y.sort()
 
 y2 = [i for i in y if i < 50_000]
 x2 = [y.index(i) for i in y2]
+
+nomer = [t.index(i) for i in y2]
+sh = [S[i][0] for i in nomer]
 
 y3 = [50_000 for _ in range(0, 15)]
 
@@ -41,6 +48,14 @@ ax2.set_ylabel("Стоймость м2")
 ax2.set_yticks(np.arange(0, 55_000, step=5_000))
 ax2.set_xticks(np.arange(0, len(x2), step=1))
 ax2.bar(x2, y2)
+
+ax4.set_title('Площадь домов чья стоимости м2 < 50 000 ')
+ax4.set_xlabel("Номер дома")
+ax4.set_ylabel("Площадь дома")
+ax4.set_yticks(np.arange(0, 300, step=20))
+ax4.set_xticks(np.arange(0, len(x2), step=1))
+ax4.bar(x2, sh)
+
 fig.show()
 fig2.show()
-
+fig3.show()
